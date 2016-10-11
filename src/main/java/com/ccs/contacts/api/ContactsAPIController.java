@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,18 @@ public class ContactsAPIController {
 
     @Autowired
     private ContactsService contactsService;
+
+    @ApiOperation(value = "Create a new contact", response = ContactDTO.class)
+    @RequestMapping(path = "/contacts", method = POST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<ContactDTO> getContacts(@RequestBody ContactDTO contactDTO) {
+
+/*
+        List<Contact> contacts = contactsService.getContacts();
+        List<ContactDTO> contactDTOs = convertContactsModelToDTOs(contacts);
+*/
+
+        return ResponseEntity.ok(new ContactDTO(1,"1","2","3"));
+    }
 
     @ApiOperation(value = "Gets all contacts", notes = "Gets all contacts\n", response = Contact.class)
     @RequestMapping(path = "/contacts", method = GET, produces = APPLICATION_JSON_VALUE)

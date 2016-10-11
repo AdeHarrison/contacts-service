@@ -1,6 +1,7 @@
 package com.ccs.contacts.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
@@ -13,7 +14,10 @@ public class ContactDTO {
     private final String lastName;
 
     @JsonCreator
-    public ContactDTO(int contactId, String firstName, String middleName, String lastName) {
+    public ContactDTO(@JsonProperty("contactId") int contactId,
+                      @JsonProperty("firstName") String firstName,
+                      @JsonProperty("middleName") String middleName,
+                      @JsonProperty("lastName") String lastName) {
         this.contactId = contactId;
         this.firstName = firstName;
         this.middleName = middleName;
