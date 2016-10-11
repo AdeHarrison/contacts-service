@@ -47,8 +47,6 @@ public class ContactsAPIControllerTest {
 
     @Test
     public void getContacts() throws Exception {
-        System.out.println(1);
-
 
         Mockito.when(contactsService.getContacts()).thenReturn(getTestContacts());
 
@@ -67,8 +65,8 @@ public class ContactsAPIControllerTest {
 
     private List<Contact> getTestContacts() {
         return Arrays.asList(
-                new Contact("a1", "a2", "a3"),
-                new Contact("b1", "b2", "b3"),
-                new Contact("c1", "c2", "c3"));
+                new Contact(1, "a1", "a2", "a3"),
+                new Contact(2, "b1", "b2", "b3"),
+                new Contact(3, "c1", "c2", "c3"));
     }
 }

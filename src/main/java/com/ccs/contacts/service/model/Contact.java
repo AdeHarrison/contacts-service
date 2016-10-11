@@ -1,14 +1,24 @@
 package com.ccs.contacts.service.model;
 
-public class Contact {
-    public String firstName;
-    public String middleName;
-    public String lastName;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
-    public Contact(String firstName, String middleName, String lastName) {
+public class Contact {
+    private int contactId;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+
+    public Contact(int contactId, String firstName, String middleName, String lastName) {
+        this.contactId = contactId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+    }
+
+    public int getContactId() {
+        return contactId;
     }
 
     public String getFirstName() {
@@ -33,5 +43,20 @@ public class Contact {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public int hashCode() {
+        return reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return reflectionEquals(this, obj);
+    }
+
+    @Override
+    public String toString() {
+        return reflectionToString(this);
     }
 }
