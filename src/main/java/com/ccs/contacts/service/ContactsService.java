@@ -1,6 +1,6 @@
 package com.ccs.contacts.service;
 
-import com.ccs.contacts.ContactsPersistanceHandler;
+import com.ccs.contacts.persistance.ContactsPersistanceHandler;
 import com.ccs.contacts.service.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

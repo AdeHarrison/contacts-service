@@ -1,4 +1,4 @@
-package com.ccs.contacts;
+package com.ccs.contacts.persistance;
 
 import com.ccs.contacts.service.model.Contact;
 import org.ektorp.CouchDbConnector;

@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContacts;
 import static org.hamcrest.core.Is.is;
 
 import java.util.Arrays;
@@ -61,12 +62,5 @@ public class ContactsAPIControllerTest {
                 .andExpect(jsonPath("$[2].middleName", is("c2")))
                 .andExpect(jsonPath("$[2].lastName", is("c3")));
 
-    }
-
-    private List<Contact> getTestContacts() {
-        return Arrays.asList(
-                new Contact(1, "a1", "a2", "a3"),
-                new Contact(2, "b1", "b2", "b3"),
-                new Contact(3, "c1", "c2", "c3"));
     }
 }

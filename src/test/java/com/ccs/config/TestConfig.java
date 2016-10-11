@@ -1,6 +1,6 @@
 package com.ccs.config;
 
-import com.ccs.contacts.ContactsPersistanceHandler;
+import com.ccs.contacts.persistance.ContactsPersistanceHandler;
 import com.ccs.contacts.service.ContactsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
