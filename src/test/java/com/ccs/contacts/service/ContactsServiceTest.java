@@ -1,5 +1,6 @@
 package com.ccs.contacts.service;
 
+import com.ccs.contacts.api.dto.ContactDTO;
 import com.ccs.contacts.persistance.ContactsPersistanceHandler;
 import com.ccs.contacts.service.model.Contact;
 import org.junit.Test;
@@ -12,6 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContact;
+import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContactDTO;
 import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContacts;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,6 +29,18 @@ public class ContactsServiceTest {
 
     @Mock
     ContactsPersistanceHandler contactsPersistanceHandler;
+
+    @Test
+    public void addContacts() throws Exception {
+        ContactDTO testContactDTO = getTestContactDTO();
+        Contact testContact = getTestContact();
+
+        Mockito.when(contactsService.addContact(testContact)).thenReturn(getTestContact());
+
+        contactsService.addContact(testContact);
+
+//        assertThat(contacts.size(), is(3));
+    }
 
     @Test
     public void getContacts() throws Exception {

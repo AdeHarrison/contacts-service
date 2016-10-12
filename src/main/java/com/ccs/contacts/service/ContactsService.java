@@ -4,6 +4,7 @@ import com.ccs.contacts.persistance.ContactsPersistanceHandler;
 import com.ccs.contacts.service.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,5 +21,9 @@ public class ContactsService {
                 new Contact(2, "b1", "b2", "b3"),
                 new Contact(3, "c1", "c2", "c3"));
 //        return contactsPersistanceHandler.getAll();
+    }
+
+    public Contact addContact(Contact contact) {
+        throw new NotImplementedException();
     }
 }

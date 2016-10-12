@@ -6,7 +6,6 @@ import com.ccs.contacts.service.model.Contact;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ccs.contacts.converter.ContactConverter.convertContactDTOToContact;
+import static com.ccs.contacts.converter.ContactConverter.convertContactToContactDTO;
 import static org.springframework.http.MediaType.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -29,12 +30,10 @@ public class ContactsAPIController {
     @RequestMapping(path = "/contacts", method = POST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<ContactDTO> getContacts(@RequestBody ContactDTO contactDTO) {
 
-/*
-        List<Contact> contacts = contactsService.getContacts();
-        List<ContactDTO> contactDTOs = convertContactsModelToDTOs(contacts);
-*/
+        Contact contact = contactsService.addContact(convertContactDTOToContact(contactDTO));
+        ContactDTO contactResponse = convertContactToContactDTO(contact);
 
-        return ResponseEntity.ok(new ContactDTO(1,"1","2","3"));
+        return ResponseEntity.ok((contactResponse));
     }
 
     @ApiOperation(value = "Gets all contacts", notes = "Gets all contacts\n", response = Contact.class)
