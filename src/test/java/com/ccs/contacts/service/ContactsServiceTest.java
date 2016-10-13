@@ -27,7 +27,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class ContactsServiceTest {
 
-    private static int DEFAULT_CONTACT_ID1 = 999;
+    private static String DEFAULT_CONTACT_ID1 = "99999";
 
     @InjectMocks
     ContactsService contactsService;

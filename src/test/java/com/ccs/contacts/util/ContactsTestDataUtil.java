@@ -9,7 +9,7 @@ import java.util.List;
 public class ContactsTestDataUtil {
 
     public static ContactDTO getTestContactDTO() {
-        return new ContactDTO(1, "a1", "a2", "a3");
+        return new ContactDTO("1", "a1", "a2", "a3");
     }
 
 /*
@@ -19,14 +19,14 @@ public class ContactsTestDataUtil {
 */
 
     public static Contact getTestContact() {
-        return new Contact(1, "a1", "a2", "a3");
+        return new Contact("1", "a1", "a2", "a3");
     }
 
     public static List<Contact> getTestContacts() {
         return Arrays.asList(
-                new Contact(1, "a1", "a2", "a3"),
-                new Contact(2, "b1", "b2", "b3"),
-                new Contact(3, "c1", "c2", "c3"));
+                new Contact("1", "a1", "a2", "a3"),
+                new Contact("2", "b1", "b2", "b3"),
+                new Contact("3", "c1", "c2", "c3"));
     }
 
     public static String getTestContactAsJson() {

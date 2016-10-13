@@ -8,13 +8,13 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 public class ContactDTO {
-    private final int contactId;
+    private final String contactId;
     private final String firstName;
     private final String middleName;
     private final String lastName;
 
     @JsonCreator
-    public ContactDTO(@JsonProperty("contactId") int contactId,
+    public ContactDTO(@JsonProperty("contactId") String contactId,
                       @JsonProperty("firstName") String firstName,
                       @JsonProperty("middleName") String middleName,
                       @JsonProperty("lastName") String lastName) {
@@ -24,7 +24,7 @@ public class ContactDTO {
         this.lastName = lastName;
     }
 
-    public int getContactId() {
+    public String getContactId() {
         return contactId;
     }
 

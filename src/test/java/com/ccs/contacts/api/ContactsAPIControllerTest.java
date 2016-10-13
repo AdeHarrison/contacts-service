@@ -78,7 +78,7 @@ public class ContactsAPIControllerTest {
                 .contentType(APPLICATION_JSON)
                 .accept(APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(jsonPath("$.contactId", is(1)))
+                .andExpect(jsonPath("$.contactId", is("1")))
                 .andExpect(jsonPath("$.firstName", is("a1")))
                 .andExpect(jsonPath("$.middleName", is("a2")))
                 .andExpect(jsonPath("$.lastName", is("a3")));
@@ -105,15 +105,15 @@ public class ContactsAPIControllerTest {
         when(contactsService.getContacts()).thenReturn(getTestContacts());
 
         mvc.perform(get("/contacts")).andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].contactId", is(1)))
+                .andExpect(jsonPath("$[0].contactId", is("1")))
                 .andExpect(jsonPath("$[0].firstName", is("a1")))
                 .andExpect(jsonPath("$[0].middleName", is("a2")))
                 .andExpect(jsonPath("$[0].lastName", is("a3")))
-                .andExpect(jsonPath("$[1].contactId", is(2)))
+                .andExpect(jsonPath("$[1].contactId", is("2")))
                 .andExpect(jsonPath("$[1].firstName", is("b1")))
                 .andExpect(jsonPath("$[1].middleName", is("b2")))
                 .andExpect(jsonPath("$[1].lastName", is("b3")))
-                .andExpect(jsonPath("$[2].contactId", is(3)))
+                .andExpect(jsonPath("$[2].contactId", is("3")))
                 .andExpect(jsonPath("$[2].firstName", is("c1")))
                 .andExpect(jsonPath("$[2].middleName", is("c2")))
                 .andExpect(jsonPath("$[2].lastName", is("c3")));

@@ -5,23 +5,23 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 public class Contact {
-    private int contactId;
+    private String contactId;
     private String firstName;
     private String middleName;
     private String lastName;
 
-    public Contact(int contactId, String firstName, String middleName, String lastName) {
+    public Contact(String contactId, String firstName, String middleName, String lastName) {
         this.contactId = contactId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
     }
 
-    public void setContactId(int contactId) {
+    public void setContactId(String contactId) {
         this.contactId = contactId;
     }
 
-    public int getContactId() {
+    public String getContactId() {
         return contactId;
     }
 
