@@ -7,6 +7,7 @@ import com.ccs.contacts.service.ContactsService;
 import com.ccs.contacts.service.model.Contact;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.ccs.contacts.converter.ContactConverter.convertContactDTOToContact;
-import static com.ccs.contacts.converter.ContactConverter.convertContactToContactDTO;
+import static com.ccs.contacts.converter.ContactConverter.*;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.*;
@@ -51,18 +51,24 @@ public class ContactsAPIController {
         return ResponseEntity.ok((contactResponse));
     }
 
+    @ApiOperation(value = "Get a contact by id", notes = "Get a contact by id\n", response = Contact.class)
+    @RequestMapping(path = "/contacts/{contactId}", method = GET, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<ContactDTO> getContact(@ApiParam(value = "the ID of the contact to retrieve", required = true)
+                                                           @PathVariable("contactId") String contactId) {
+
+        Contact contact = contactsService.getContact(contactId);
+        ContactDTO contactDTO = convertContactModelToDTO(contact);
+
+        return ResponseEntity.ok(contactDTO);
+    }
+
     @ApiOperation(value = "Gets all contacts", notes = "Gets all contacts\n", response = Contact.class)
     @RequestMapping(path = "/contacts", method = GET, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ContactDTO>> createContact() {
+    public ResponseEntity<List<ContactDTO>> getContacts() {
 
         List<Contact> contacts = contactsService.getContacts();
         List<ContactDTO> contactDTOs = convertContactsModelToDTOs(contacts);
 
         return ResponseEntity.ok(contactDTOs);
-    }
-
-    private List<ContactDTO> convertContactsModelToDTOs(List<Contact> contacts) {
-        return contacts.stream().map(c -> new ContactDTO(c.getContactId(), c.getFirstName(), c.getMiddleName(), c.getLastName()))
-                .collect(Collectors.toList());
     }
 }

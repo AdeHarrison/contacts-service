@@ -12,8 +12,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -27,7 +29,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,10 +40,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {TestConfig.class, ContactsServiceApplication.class})
-@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {TestConfig.class, ContactsServiceApplication.class})
 public class ContactsAPIControllerTest {
+
+    private static String CONTACT_ID1 = "99999";
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -84,27 +89,48 @@ public class ContactsAPIControllerTest {
                 .andExpect(jsonPath("$.lastName", is("a3")));
     }
 
-
     @Test
-    public void updateContact() throws Exception {
-
+    public void handleNotExistsExceptionWhenUpdatingContactThatDoesNotExist() throws Exception {
+        assertFalse(true);
     }
 
-/*    @Test
-    public void deleteContact() throws Exception {
+    @Test
+    public void successfullyUpdateContact() throws Exception {
+        assertFalse(true);
+    }
+
+    @Test
+    public void handleNotExistsExceptionWhenDeletingContactThatDoesNotExist() throws Exception {
+        assertFalse(true);
+    }
+
+    @Test
+    public void successfullyDeleteContact() throws Exception {
+        assertFalse(true);
     }
 
     @Test
     public void getContact() throws Exception {
+        Contact expected = getTestContact();
+
+        when(contactsService.getContact(anyString())).thenReturn(expected);
+
+        mvc.perform(get("/contacts/" + "1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.contactId", is("1")))
+                .andExpect(jsonPath("$.firstName", is("a1")))
+                .andExpect(jsonPath("$.middleName", is("a2")))
+                .andExpect(jsonPath("$.lastName", is("a3")));
     }
-*/
 
     @Test
     public void getAllContacts() throws Exception {
 
         when(contactsService.getContacts()).thenReturn(getTestContacts());
 
-        mvc.perform(get("/contacts")).andExpect(status().isOk())
+        mvc.perform(get("/contacts"))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].contactId", is("1")))
                 .andExpect(jsonPath("$[0].firstName", is("a1")))
                 .andExpect(jsonPath("$[0].middleName", is("a2")))

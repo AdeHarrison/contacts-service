@@ -32,8 +32,10 @@ public class ContactsService {
                 new Contact("1", "a1", "a2", "a3"),
                 new Contact("2", "b1", "b2", "b3"),
                 new Contact("3", "c1", "c2", "c3"));
-//        return contactsPersistanceHandler.getAll();
     }
 
-
+    public Contact getContact(String contactId) {
+        throw new NotImplementedException();
+        //return null;
+    }
 }

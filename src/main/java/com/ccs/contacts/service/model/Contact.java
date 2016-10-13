@@ -5,7 +5,7 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 public class Contact {
-    private String contactId;
+    private String contactId ="";
     private String firstName;
     private String middleName;
     private String lastName;

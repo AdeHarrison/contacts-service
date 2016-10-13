@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -19,12 +20,13 @@ import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContacts;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class ContactsServiceTest {
 
     private static String DEFAULT_CONTACT_ID1 = "99999";
@@ -39,19 +41,21 @@ public class ContactsServiceTest {
     public void shouldThrowAlreadyExistsExceptionWhenContactAlreadyExists() throws AlreadyExistsException {
         when(contactsPersistanceHandler.contactExists(any(Contact.class))).thenReturn(true);
         contactsService.createContact(getTestContact());
-   }
+    }
 
     @Test
     public void successfullyCreateNewContact() throws AlreadyExistsException {
-        Contact testContact = getTestContact();
+        Contact expected = getTestContact();
 
+        //when(contactsService.createContact(any(Contact.class))).thenReturn(expected);
         when(contactsPersistanceHandler.generateUniqueContactId()).thenReturn(DEFAULT_CONTACT_ID1);
 
-        Contact actual = contactsService.createContact(testContact);
+        Contact actual = contactsService.createContact(expected);
 
-        assertThat(actual.getContactId(), is(DEFAULT_CONTACT_ID1));
-
-//        assertThat(contacts.size(), is(3));
+        assertThat(actual.getContactId(), is(expected.getContactId()));
+        assertThat(actual.getFirstName(), is(expected.getFirstName()));
+        assertThat(actual.getMiddleName(), is(expected.getMiddleName()));
+        assertThat(actual.getLastName(), is(expected.getLastName()));
     }
 
     @Test
