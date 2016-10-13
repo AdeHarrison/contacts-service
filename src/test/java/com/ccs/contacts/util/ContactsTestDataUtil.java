@@ -12,6 +12,12 @@ public class ContactsTestDataUtil {
         return new ContactDTO(1, "a1", "a2", "a3");
     }
 
+/*
+    public static Contact getTestCreateContact() {
+        return new Contact(0, "a1", "a2", "a3");
+    }
+*/
+
     public static Contact getTestContact() {
         return new Contact(1, "a1", "a2", "a3");
     }
@@ -24,7 +30,8 @@ public class ContactsTestDataUtil {
     }
 
     public static String getTestContactAsJson() {
-        return "{\"contactId\":1, \"firstName\":\"a1\", \"middleName\":\"a2\", \"lastName\": \"a3\"}";
+        return "{\"firstName\":\"a1\", \"middleName\":\"a2\", \"lastName\": \"a3\"}";
+//        return "{\"contactId\":1, \"firstName\":\"a1\", \"middleName\":\"a2\", \"lastName\": \"a3\"}";
     }
 
 }

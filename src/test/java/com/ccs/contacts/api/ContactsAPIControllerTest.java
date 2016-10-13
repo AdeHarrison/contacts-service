@@ -20,8 +20,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContactAsJson;
-import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContacts;
+import static com.ccs.contacts.util.ContactsTestDataUtil.*;
 import static org.hamcrest.core.Is.is;
 
 import java.util.Arrays;
@@ -33,6 +32,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -65,34 +65,26 @@ public class ContactsAPIControllerTest {
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON))
                 .andExpect(status().isConflict())
-                .andExpect(jsonPath("$.detail", Matchers.is("exception message")));
+                .andExpect(jsonPath("$.detail", is("exception message")));
     }
 
     @Test
     public void successfullyCreateNewContact() throws Exception {
 
-        MvcResult result = mvc.perform(post("/contacts")
+        when(contactsService.createContact(any(Contact.class))).thenReturn(getTestContact());
+
+        mvc.perform(post("/contacts")
                 .content(getTestContactAsJson())
                 .contentType(APPLICATION_JSON)
                 .accept(APPLICATION_JSON))
-                .andReturn();
-
-        System.out.println(1);
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$[0].contactId", is(1)))
-//                .andExpect(jsonPath("$[0].firstName", is("a1")))
-//                .andExpect(jsonPath("$[0].middleName", is("a2")))
-//                .andExpect(jsonPath("$[0].lastName", is("a3")))
-//                .andExpect(jsonPath("$[1].contactId", is(2)))
-//                .andExpect(jsonPath("$[1].firstName", is("b1")))
-//                .andExpect(jsonPath("$[1].middleName", is("b2")))
-//                .andExpect(jsonPath("$[1].lastName", is("b3")))
-//                .andExpect(jsonPath("$[2].contactId", is(3)))
-//                .andExpect(jsonPath("$[2].firstName", is("c1")))
-//                .andExpect(jsonPath("$[2].middleName", is("c2")))
-//                .andExpect(jsonPath("$[2].lastName", is("c3")));
+                .andDo(print())
+                .andExpect(jsonPath("$.contactId", is(1)))
+                .andExpect(jsonPath("$.firstName", is("a1")))
+                .andExpect(jsonPath("$.middleName", is("a2")))
+                .andExpect(jsonPath("$.lastName", is("a3")));
     }
 
+/*
     @Test
     public void updateContact() throws Exception {
     }
@@ -104,6 +96,7 @@ public class ContactsAPIControllerTest {
     @Test
     public void getContact() throws Exception {
     }
+*/
 
     @Test
     public void getAllContacts() throws Exception {

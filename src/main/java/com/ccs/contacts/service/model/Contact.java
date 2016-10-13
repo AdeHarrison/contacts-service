@@ -17,6 +17,10 @@ public class Contact {
         this.lastName = lastName;
     }
 
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
+    }
+
     public int getContactId() {
         return contactId;
     }

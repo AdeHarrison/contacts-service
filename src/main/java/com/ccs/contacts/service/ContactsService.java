@@ -25,6 +25,13 @@ public class ContactsService {
     }
 
     public Contact createContact(Contact contact) throws AlreadyExistsException {
+        contact.setContactId(generateUniqueContactId());
+
         throw new NotImplementedException();
+    }
+
+
+    public int generateUniqueContactId() {
+        return 1;
     }
 }
