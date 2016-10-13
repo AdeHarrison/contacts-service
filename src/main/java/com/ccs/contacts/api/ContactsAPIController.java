@@ -10,18 +10,17 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.ccs.contacts.converter.ContactConverter.*;
 import static org.slf4j.LoggerFactory.getLogger;
-import static org.springframework.http.HttpStatus.*;
-import static org.springframework.http.MediaType.*;
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @Api(value = "Contacts API", description = "the contacts API")
@@ -35,7 +34,7 @@ public class ContactsAPIController {
 
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(CONFLICT)
-    public ErrorMessageDTO handleContactAlreadyExists (AlreadyExistsException aee) {
+    public ErrorMessageDTO handleContactAlreadyExists(AlreadyExistsException aee) {
         log.info(aee.getMessage());
         return new ErrorMessageDTO("Application already exists", aee.getMessage());
     }
@@ -54,7 +53,7 @@ public class ContactsAPIController {
     @ApiOperation(value = "Get a contact by id", notes = "Get a contact by id\n", response = Contact.class)
     @RequestMapping(path = "/contacts/{contactId}", method = GET, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<ContactDTO> getContact(@ApiParam(value = "the ID of the contact to retrieve", required = true)
-                                                           @PathVariable("contactId") String contactId) {
+                                                 @PathVariable("contactId") String contactId) {
 
         Contact contact = contactsService.getContact(contactId);
         ContactDTO contactDTO = convertContactModelToDTO(contact);

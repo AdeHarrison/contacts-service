@@ -1,21 +1,13 @@
 package com.ccs.contacts.persistance;
 
-import com.ccs.contacts.api.dto.AlreadyExistsException;
-import com.ccs.contacts.service.model.Contact;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContact;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 public class ContactsPersistanceHandlerTest {

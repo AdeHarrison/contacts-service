@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 @Configuration
 public class TestConfig {
@@ -19,7 +19,7 @@ public class TestConfig {
 
     @Bean
     @Primary
-    public ContactsPersistanceHandler contactsPersistanceHandler(){
+    public ContactsPersistanceHandler contactsPersistanceHandler() {
         return mock(ContactsPersistanceHandler.class);
     }
 }

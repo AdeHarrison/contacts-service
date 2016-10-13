@@ -20,10 +20,6 @@ public class ContactConverter {
         return contacts.stream()
                 .map(c -> convertContactModelToDTO(c))
                 .collect(Collectors.toList());
-/*
-        return contacts.stream().map(c -> new ContactDTO(c.getContactId(), c.getFirstName(), c.getMiddleName(), c.getLastName()))
-                .collect(Collectors.toList());
-*/
     }
 
     public static ContactDTO convertContactModelToDTO(Contact contact) {

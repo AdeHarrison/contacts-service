@@ -18,7 +18,7 @@ public class ContactsService {
 
     public Contact createContact(Contact contact) throws AlreadyExistsException {
 
-        if(contactsPersistanceHandler.contactExists(contact)) {
+        if (contactsPersistanceHandler.contactExists(contact)) {
             throw new AlreadyExistsException(String.format("Contact '%s, %s' already exists", contact.getFirstName(), contact.getLastName()));
         }
 
@@ -36,6 +36,5 @@ public class ContactsService {
 
     public Contact getContact(String contactId) {
         throw new NotImplementedException();
-        //return null;
     }
 }

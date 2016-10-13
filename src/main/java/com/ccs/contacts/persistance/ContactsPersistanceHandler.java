@@ -1,12 +1,9 @@
 package com.ccs.contacts.persistance;
 
 import com.ccs.contacts.service.model.Contact;
-import org.ektorp.CouchDbConnector;
-import org.ektorp.support.CouchDbRepositorySupport;
 import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
