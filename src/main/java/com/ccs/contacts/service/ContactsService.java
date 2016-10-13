@@ -16,6 +16,17 @@ public class ContactsService {
     @Autowired
     ContactsPersistanceHandler contactsPersistanceHandler;
 
+    public Contact createContact(Contact contact) throws AlreadyExistsException {
+
+        if(contactsPersistanceHandler.contactExists(contact)) {
+            throw new AlreadyExistsException(String.format("Contact '%s, %s, %s' already exists", contact.getFirstName(), contact.getMiddleName(), contact.getLastName()));
+        }
+
+        contact.setContactId(contactsPersistanceHandler.generateUniqueContactId());
+
+        return contact;
+    }
+
     public List<Contact> getContacts() {
         return Arrays.asList(
                 new Contact(1, "a1", "a2", "a3"),
@@ -24,14 +35,5 @@ public class ContactsService {
 //        return contactsPersistanceHandler.getAll();
     }
 
-    public Contact createContact(Contact contact) throws AlreadyExistsException {
-        contact.setContactId(generateUniqueContactId());
 
-        throw new NotImplementedException();
-    }
-
-
-    public int generateUniqueContactId() {
-        return 1;
-    }
 }

@@ -84,12 +84,13 @@ public class ContactsAPIControllerTest {
                 .andExpect(jsonPath("$.lastName", is("a3")));
     }
 
-/*
-    @Test
-    public void updateContact() throws Exception {
-    }
 
     @Test
+    public void updateContact() throws Exception {
+
+    }
+
+/*    @Test
     public void deleteContact() throws Exception {
     }
 
