@@ -1,5 +1,6 @@
 package com.ccs.contacts.service;
 
+import com.ccs.contacts.api.dto.AlreadyExistsException;
 import com.ccs.contacts.persistance.ContactsPersistanceHandler;
 import com.ccs.contacts.service.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ContactsService {
 //        return contactsPersistanceHandler.getAll();
     }
 
-    public Contact addContact(Contact contact) {
+    public Contact createContact(Contact contact) throws AlreadyExistsException {
         throw new NotImplementedException();
     }
 }

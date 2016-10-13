@@ -1,5 +1,6 @@
 package com.ccs.contacts.service;
 
+import com.ccs.contacts.api.dto.AlreadyExistsException;
 import com.ccs.contacts.api.dto.ContactDTO;
 import com.ccs.contacts.persistance.ContactsPersistanceHandler;
 import com.ccs.contacts.service.model.Contact;
@@ -10,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContact;
@@ -31,19 +31,19 @@ public class ContactsServiceTest {
     ContactsPersistanceHandler contactsPersistanceHandler;
 
     @Test
-    public void addContacts() throws Exception {
+    public void addContacts() throws AlreadyExistsException {
         ContactDTO testContactDTO = getTestContactDTO();
         Contact testContact = getTestContact();
 
-        Mockito.when(contactsService.addContact(testContact)).thenReturn(getTestContact());
+        Mockito.when(contactsService.createContact(testContact)).thenReturn(getTestContact());
 
-        contactsService.addContact(testContact);
+        contactsService.createContact(testContact);
 
 //        assertThat(contacts.size(), is(3));
     }
 
     @Test
-    public void getContacts() throws Exception {
+    public void getContacts() {
 
         Mockito.when(contactsPersistanceHandler.getAll()).thenReturn(getTestContacts());
 

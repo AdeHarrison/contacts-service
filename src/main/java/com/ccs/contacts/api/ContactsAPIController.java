@@ -1,21 +1,25 @@
 package com.ccs.contacts.api;
 
+import com.ccs.contacts.api.dto.AlreadyExistsException;
 import com.ccs.contacts.api.dto.ContactDTO;
+import com.ccs.contacts.api.dto.ErrorMessageDTO;
 import com.ccs.contacts.service.ContactsService;
 import com.ccs.contacts.service.model.Contact;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ccs.contacts.converter.ContactConverter.convertContactDTOToContact;
 import static com.ccs.contacts.converter.ContactConverter.convertContactToContactDTO;
+import static org.slf4j.LoggerFactory.getLogger;
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -23,14 +27,25 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Api(value = "Contacts API", description = "the contacts API")
 public class ContactsAPIController {
 
+    private static final Logger log = getLogger(ContactsAPIController.class);
+
     @Autowired
     private ContactsService contactsService;
 
+
+    @ExceptionHandler(AlreadyExistsException.class)
+    @ResponseStatus(CONFLICT)
+    public ErrorMessageDTO handleContactAlreadyExists (AlreadyExistsException aee) {
+        log.info(aee.getMessage());
+        return new ErrorMessageDTO("Application already exists", aee.getMessage());
+    }
+
+
     @ApiOperation(value = "Create a new contact", response = ContactDTO.class)
     @RequestMapping(path = "/contacts", method = POST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ContactDTO> getContacts(@RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<ContactDTO> createContact(@RequestBody ContactDTO contactDTO) throws AlreadyExistsException {
 
-        Contact contact = contactsService.addContact(convertContactDTOToContact(contactDTO));
+        Contact contact = contactsService.createContact(convertContactDTOToContact(contactDTO));
         ContactDTO contactResponse = convertContactToContactDTO(contact);
 
         return ResponseEntity.ok((contactResponse));
@@ -38,7 +53,7 @@ public class ContactsAPIController {
 
     @ApiOperation(value = "Gets all contacts", notes = "Gets all contacts\n", response = Contact.class)
     @RequestMapping(path = "/contacts", method = GET, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ContactDTO>> getContacts() {
+    public ResponseEntity<List<ContactDTO>> createContact() {
 
         List<Contact> contacts = contactsService.getContacts();
         List<ContactDTO> contactDTOs = convertContactsModelToDTOs(contacts);

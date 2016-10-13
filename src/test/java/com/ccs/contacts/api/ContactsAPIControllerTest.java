@@ -1,9 +1,11 @@
 package com.ccs.contacts.api;
 
 import com.ccs.ContactsServiceApplication;
+import com.ccs.contacts.api.dto.AlreadyExistsException;
 import com.ccs.contacts.service.ContactsService;
 import com.ccs.contacts.service.model.Contact;
 import com.ccs.config.TestConfig;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContactAsJson;
 import static com.ccs.contacts.util.ContactsTestDataUtil.getTestContacts;
 import static org.hamcrest.core.Is.is;
 
@@ -25,6 +28,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,7 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = {TestConfig.class, ContactsServiceApplication.class})
 @WebAppConfiguration
 public class ContactsAPIControllerTest {
-
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -51,11 +55,24 @@ public class ContactsAPIControllerTest {
     }
 
     @Test
-    public void addContact() throws Exception {
-        String json = "{\"contactId\":1, \"firstName\":\"a1\", \"middleName\":\"a2\", \"lastName\": \"a3\"}";
+    public void handleAlreadyExistsExceptionWhenCreatingContactThatExists() throws Exception {
+
+        when(contactsService.createContact(any(Contact.class))).thenThrow(new AlreadyExistsException("exception message"));
+
+        mvc.perform(
+                post("/contacts")
+                        .content(getTestContactAsJson())
+                        .contentType(APPLICATION_JSON)
+                        .accept(APPLICATION_JSON))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.detail", Matchers.is("exception message")));
+    }
+
+    @Test
+    public void successfullyCreateNewContact() throws Exception {
 
         MvcResult result = mvc.perform(post("/contacts")
-                .content(json)
+                .content(getTestContactAsJson())
                 .contentType(APPLICATION_JSON)
                 .accept(APPLICATION_JSON))
                 .andReturn();
@@ -89,9 +106,9 @@ public class ContactsAPIControllerTest {
     }
 
     @Test
-    public void getContacts() throws Exception {
+    public void getAllContacts() throws Exception {
 
-        Mockito.when(contactsService.getContacts()).thenReturn(getTestContacts());
+        when(contactsService.getContacts()).thenReturn(getTestContacts());
 
         mvc.perform(get("/contacts")).andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].contactId", is(1)))

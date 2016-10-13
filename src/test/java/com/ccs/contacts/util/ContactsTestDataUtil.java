@@ -22,4 +22,9 @@ public class ContactsTestDataUtil {
                 new Contact(2, "b1", "b2", "b3"),
                 new Contact(3, "c1", "c2", "c3"));
     }
+
+    public static String getTestContactAsJson() {
+        return "{\"contactId\":1, \"firstName\":\"a1\", \"middleName\":\"a2\", \"lastName\": \"a3\"}";
+    }
+
 }
