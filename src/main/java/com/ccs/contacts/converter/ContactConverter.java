@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 public class ContactConverter {
 
     public static Contact convertContactDTOToContact(ContactDTO contactDTO) {
-        return new Contact(contactDTO.getContactId(), contactDTO.getFirstName(), contactDTO.getMiddleName(), contactDTO.getLastName());
+        return new Contact(contactDTO.getContactId(), contactDTO.getFirstName(), contactDTO.getLastName());
     }
 
     public static ContactDTO convertContactToContactDTO(Contact contact) {
-        return new ContactDTO(contact.getContactId(), contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
+        return new ContactDTO(contact.getContactId(), contact.getFirstName(), contact.getLastName());
     }
 
     public static List<ContactDTO> convertContactsModelToDTOs(List<Contact> contacts) {
@@ -27,6 +27,6 @@ public class ContactConverter {
     }
 
     public static ContactDTO convertContactModelToDTO(Contact contact) {
-        return new ContactDTO(contact.getContactId(), contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
+        return new ContactDTO(contact.getContactId(), contact.getFirstName(), contact.getLastName());
     }
 }

@@ -10,17 +10,14 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 public class ContactDTO {
     private final String contactId;
     private final String firstName;
-    private final String middleName;
     private final String lastName;
 
     @JsonCreator
     public ContactDTO(@JsonProperty("contactId") String contactId,
                       @JsonProperty("firstName") String firstName,
-                      @JsonProperty("middleName") String middleName,
                       @JsonProperty("lastName") String lastName) {
         this.contactId = contactId;
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
     }
 
@@ -30,10 +27,6 @@ public class ContactDTO {
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
     }
 
     public String getLastName() {

@@ -5,15 +5,13 @@ import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCod
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 public class Contact {
-    private String contactId ="";
+    private String contactId = "";
     private String firstName;
-    private String middleName;
     private String lastName;
 
-    public Contact(String contactId, String firstName, String middleName, String lastName) {
+    public Contact(String contactId, String firstName, String lastName) {
         this.contactId = contactId;
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
     }
 
@@ -31,14 +29,6 @@ public class Contact {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public String getLastName() {

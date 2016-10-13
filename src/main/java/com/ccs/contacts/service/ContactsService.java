@@ -19,7 +19,7 @@ public class ContactsService {
     public Contact createContact(Contact contact) throws AlreadyExistsException {
 
         if(contactsPersistanceHandler.contactExists(contact)) {
-            throw new AlreadyExistsException(String.format("Contact '%s, %s, %s' already exists", contact.getFirstName(), contact.getMiddleName(), contact.getLastName()));
+            throw new AlreadyExistsException(String.format("Contact '%s, %s' already exists", contact.getFirstName(), contact.getLastName()));
         }
 
         contact.setContactId(contactsPersistanceHandler.generateUniqueContactId());
@@ -29,9 +29,9 @@ public class ContactsService {
 
     public List<Contact> getContacts() {
         return Arrays.asList(
-                new Contact("1", "a1", "a2", "a3"),
-                new Contact("2", "b1", "b2", "b3"),
-                new Contact("3", "c1", "c2", "c3"));
+                new Contact("1", "a1", "a2"),
+                new Contact("2", "b1", "b2"),
+                new Contact("3", "c1", "c2"));
     }
 
     public Contact getContact(String contactId) {

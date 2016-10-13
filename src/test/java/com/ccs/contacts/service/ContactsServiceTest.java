@@ -54,7 +54,6 @@ public class ContactsServiceTest {
 
         assertThat(actual.getContactId(), is(expected.getContactId()));
         assertThat(actual.getFirstName(), is(expected.getFirstName()));
-        assertThat(actual.getMiddleName(), is(expected.getMiddleName()));
         assertThat(actual.getLastName(), is(expected.getLastName()));
     }
 
