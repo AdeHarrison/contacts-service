@@ -8,13 +8,13 @@ import java.util.List;
 
 public class ContactsTestDataUtil {
 
-    public static final String CONTACT_ID_1 = "id1";
+    public static final int CONTACT_ID_1 = 1;
     public static final String CONTACT_FIRSTNAME_1 = "firstname1";
     public static final String CONTACT_LASTNAME_1 = "lastname1";
-    public static final String CONTACT_ID_2 = "id2";
+    public static final int CONTACT_ID_2 = 2;
     public static final String CONTACT_FIRSTNAME_2 = "firstname2";
     public static final String CONTACT_LASTNAME_2 = "lastname2";
-    public static final String CONTACT_ID_3 = "id3";
+    public static final int CONTACT_ID_3 = 3;
     public static final String CONTACT_FIRSTNAME_3 = "firstname3";
     public static final String CONTACT_LASTNAME_3 = "lastname3";
 

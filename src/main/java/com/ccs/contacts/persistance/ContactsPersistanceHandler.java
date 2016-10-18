@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -24,8 +25,9 @@ public class ContactsPersistanceHandler {
         throw new NotImplementedException();
     }
 
-    public String generateUniqueContactId() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
+    public int generateUniqueContactId() {
+        return 1;
+//        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
 /*
