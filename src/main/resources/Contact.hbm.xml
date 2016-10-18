@@ -7,15 +7,15 @@
     <class name="com.ccs.contacts.service.model.Contact" table="contact">
 
         <id name="contactId" type="int" column="contact_id">
-            <generator class="native"/>
+
+            <!-- assigned by app -->
+<!--            <generator class="assigned"/>-->
+
+            <!-- auto increments id even if one provided and sets new id for you -->
+            <generator class="increment"/>
         </id>
 
-
-<!--
-        <id name="contactId" type="int" column="contact_id"/>
--->
-
-        <property name="firstName" type="string" column="first_name"/>
+    <property name="firstName" type="string" column="first_name"/>
         <property name="lastName" type="string" column="last_name"/>
     </class>
 

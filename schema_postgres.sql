@@ -11,7 +11,7 @@
 -- psql as contacts_owner
 --psql -h localhost -d contactsdb -U contacts_owner
 
-DROP TABLE contact CASCADE;
+DROP TABLE contacts_owner.contact CASCADE;
 DROP TABLE address CASCADE;
 DROP TABLE address_type CASCADE;
 DROP TABLE contact_address CASCADE;

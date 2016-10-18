@@ -20,8 +20,16 @@ public class Test {
         Session session = factory.openSession();
         Transaction tx = null;
 
+
+        Contact c1 = new Contact(4, "4", "44");
+tx = session.beginTransaction();
+        session.save(c1);
+        tx.commit();
+
+
         tx = session.beginTransaction();
         List<Contact> contacts = session.createQuery("FROM Contact").list();
+        contacts.forEach(System.out::println);
         tx.commit();
     }
 }
