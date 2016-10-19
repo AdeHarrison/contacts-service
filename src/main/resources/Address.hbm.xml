@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ccs.contacts.service.model.Address" table="address">
+
+        <id name="addressId" column="address_id" type="int">
+            <generator class="increment"/>
+        </id>
+
+        <property name="addressTypeId" column="address_type_id" type="int"/>
+        <property name="addressLine1" column="address_line_1" type="string"/>
+        <property name="addressLine2" column="address_line_2" type="string"/>
+        <property name="city" column="city" type="string"/>
+        <property name="postcode" column="postcode" type="string"/>
+    </class>
+</hibernate-mapping>

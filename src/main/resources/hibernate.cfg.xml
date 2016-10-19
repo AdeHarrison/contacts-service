@@ -10,11 +10,11 @@
         <property name="hibernate.connection.driver_class">
             com.p6spy.engine.spy.P6SpyDriver
         </property>
-<!--
-        <property name="hibernate.connection.driver_class">
-            org.postgresql.Driver
-        </property>
--->
+        <!--
+                <property name="hibernate.connection.driver_class">
+                    org.postgresql.Driver
+                </property>
+        -->
 
         <property name="hibernate.connection.sh">
             contacts_owner
@@ -33,7 +33,12 @@
 
         <!-- List of XML mapping files -->
 
-        <mapping resource="Contact.hbm.xml" />
+        <mapping resource="Contact.hbm.xml"/>
+        <mapping resource="Address.hbm.xml"/>
+        <mapping resource="AddressType.hbm.xml"/>
+<!--
+        <mapping resource="ContactAddress.hbm.xml"/>
+-->
 
     </session-factory>
 </hibernate-configuration>
