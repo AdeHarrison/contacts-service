@@ -5,6 +5,11 @@ import com.ccs.config.TestConfig;
 import com.ccs.contacts.api.dto.AlreadyExistsException;
 import com.ccs.contacts.service.ContactsService;
 import com.ccs.contacts.service.model.Contact;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -95,20 +100,8 @@ public class ContactsAPIControllerTest {
     }
 
     @Test
-    public void getContact() throws Exception {
-        Contact expected = getTestContact();
-
-        when(contactsService.getContact(anyString())).thenReturn(expected);
-
-        mvc.perform(get("/contacts/" + CONTACT_ID_1))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.contactId", is(CONTACT_ID_1)))
-                .andExpect(jsonPath("$.firstName", is(CONTACT_FIRSTNAME_1)))
-                .andExpect(jsonPath("$.lastName", is(CONTACT_LASTNAME_1)));
-    }
-
-    @Test
     public void getAllContacts() throws Exception {
+
 
         when(contactsService.getContacts()).thenReturn(getTestContacts());
 
@@ -124,5 +117,18 @@ public class ContactsAPIControllerTest {
                 .andExpect(jsonPath("$[2].firstName", is(CONTACT_FIRSTNAME_3)))
                 .andExpect(jsonPath("$[2].lastName", is(CONTACT_LASTNAME_3)));
 
+    }
+
+    @Test
+    public void getContact() throws Exception {
+        Contact expected = getTestContact();
+
+        when(contactsService.getContact(anyString())).thenReturn(expected);
+
+        mvc.perform(get("/contacts/" + CONTACT_ID_1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.contactId", is(CONTACT_ID_1)))
+                .andExpect(jsonPath("$.firstName", is(CONTACT_FIRSTNAME_1)))
+                .andExpect(jsonPath("$.lastName", is(CONTACT_LASTNAME_1)));
     }
 }

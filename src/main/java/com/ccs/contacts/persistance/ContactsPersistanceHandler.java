@@ -1,6 +1,11 @@
 package com.ccs.contacts.persistance;
 
 import com.ccs.contacts.service.model.Contact;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -11,14 +16,18 @@ import java.util.UUID;
 @Component
 public class ContactsPersistanceHandler {
     public List<Contact> getAll() {
-        throw new NotImplementedException();
 
-/*
-        return Arrays.asList(
-                new Contact("1", "a1", "a2", "a3"),
-                new Contact("2", "b1", "b2", "b3"),
-                new Contact("3", "c1", "c2", "c3"));
-*/
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Contact");
+        List<Contact> contacts = query.list();
+        contacts.forEach(System.out::println);
+        tx.commit();
+        session.close();
+
+        return contacts;
     }
 
     public boolean contactExists(Contact contact) {
