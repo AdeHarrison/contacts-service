@@ -9,7 +9,8 @@
             <generator class="increment"/>
         </id>
 
-        <property name="addressTypeId" column="address_type_id" type="int"/>
+        <one-to-one name="addressType" class="com.ccs.contacts.service.model.AddressType" cascade="save-update" constrained="false"/>
+
         <property name="addressLine1" column="address_line_1" type="string"/>
         <property name="addressLine2" column="address_line_2" type="string"/>
         <property name="city" column="city" type="string"/>

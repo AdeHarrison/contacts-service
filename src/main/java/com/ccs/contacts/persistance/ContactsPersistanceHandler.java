@@ -15,9 +15,12 @@ import java.util.UUID;
 
 @Component
 public class ContactsPersistanceHandler {
+
+    SessionFactory factory;
+
     public List<Contact> getAll() {
 
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        factory = new Configuration().configure().buildSessionFactory();
 
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();

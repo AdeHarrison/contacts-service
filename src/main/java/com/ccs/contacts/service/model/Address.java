@@ -2,7 +2,7 @@ package com.ccs.contacts.service.model;
 
 public class Address {
     private int addressId;
-    private int addressTypeId;
+    private AddressType addressType;
     private String addressLine1;
     private String addressLine2;
     private String city;
@@ -15,12 +15,12 @@ public class Address {
         this.addressId = addressId;
     }
 
-    public int getAddressTypeId() {
-        return addressTypeId;
+    public AddressType getAddressType() {
+        return addressType;
     }
 
-    public void setAddressTypeId(int addressTypeId) {
-        this.addressTypeId = addressTypeId;
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
     }
 
     public String getAddressLine1() {

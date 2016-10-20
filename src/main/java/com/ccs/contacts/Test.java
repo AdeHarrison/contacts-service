@@ -18,55 +18,10 @@ public class Test {
     public static void main(String[] args) {
 
         Test test = new Test();
-        test.testContact();
+//        test.testContact();
         test.testAddress();
-        test.testAddressType();
+//        test.testAddressType();
 
-    }
-
-    private void testAddressType() {
-        Session session = null;
-        Transaction tx = null;
-
-        session = factory.openSession();
-        tx = session.beginTransaction();
-        Query query = session.createQuery("FROM AddressType");
-        List<AddressType> list = query.list();
-        list.forEach(System.out::println);
-        tx.commit();
-        session.close();
-
-        session = factory.openSession();
-        tx = session.beginTransaction();
-        Criteria criteria = session.createCriteria(AddressType.class);
-        criteria.add(Restrictions.between("addressTypeId", 2, 3));
-        List<AddressType> list2 = criteria.list();
-        list2.forEach(System.out::println);
-        tx.commit();
-        session.close();
-    }
-
-    private void testAddress() {
-        Session session = null;
-        Transaction tx = null;
-
-        session = factory.openSession();
-        tx = session.beginTransaction();
-        Query query = session.createQuery("From Address");
-        List<Address> list = query.list();
-        list.forEach(System.out::println);
-        tx.commit();
-        session.close();
-
-        session = factory.openSession();
-        tx = session.beginTransaction();
-        Criteria criteria = session.createCriteria(Address.class);
-        criteria.setMaxResults(3);
-        criteria.add(Restrictions.between("addressId", 2, 3));
-        List<Address> list2 = criteria.list();
-        list2.forEach(System.out::println);
-        tx.commit();
-        session.close();
     }
 
     private void testContact() {
@@ -111,6 +66,52 @@ public class Test {
         criteria2.setMaxResults(2);
         List<Contact> contacts2 = criteria2.list();
         contacts2.forEach(System.out::println);
+        tx.commit();
+        session.close();
+    }
+
+    private void testAddress() {
+        Session session = null;
+        Transaction tx = null;
+
+        session = factory.openSession();
+        tx = session.beginTransaction();
+        Query query = session.createQuery("From Address");
+        List<Address> list = query.list();
+        System.out.println(list.get(0).getAddressType().getDescription());
+        list.forEach(System.out::println);
+        tx.commit();
+        session.close();
+
+        session = factory.openSession();
+        tx = session.beginTransaction();
+        Criteria criteria = session.createCriteria(Address.class);
+        criteria.setMaxResults(3);
+        criteria.add(Restrictions.between("addressId", 2, 3));
+        List<Address> list2 = criteria.list();
+        list2.forEach(System.out::println);
+        tx.commit();
+        session.close();
+    }
+
+    private void testAddressType() {
+        Session session = null;
+        Transaction tx = null;
+
+        session = factory.openSession();
+        tx = session.beginTransaction();
+        Query query = session.createQuery("FROM AddressType");
+        List<AddressType> list = query.list();
+        list.forEach(System.out::println);
+        tx.commit();
+        session.close();
+
+        session = factory.openSession();
+        tx = session.beginTransaction();
+        Criteria criteria = session.createCriteria(AddressType.class);
+        criteria.add(Restrictions.between("addressTypeId", 2, 3));
+        List<AddressType> list2 = criteria.list();
+        list2.forEach(System.out::println);
         tx.commit();
         session.close();
     }
